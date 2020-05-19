@@ -49,7 +49,7 @@ class UserController extends Controller {
 //        dump($this->data);
         $user = new User();
         //"oZ_AN5ISqFZoLFDVhP9DU4TqK-F0" $this->openid_session_key['openid']
-        $user = $user->firstOrCreate(['open_id' => $this->openid_session_key['openid'], [
+        $user = $user->firstOrCreate(['open_id' => $this->openid_session_key['openid']], [
             'username' => $this->data['nick_name'],
             'open_id' => $this->openid_session_key['openid'],//"oZ_AN5ISqFZoLFDVhP9DU4TqK-F0",$this->openid_session_key['openid']
             'avatarUrl' => $this->data['avatarUrl'],
@@ -102,7 +102,7 @@ class UserController extends Controller {
                     "start_time" => $item['start_time'],
                     "end_time" => $item['end_time'],
                     "status" => $status,
-                    "locataion" => $location,
+                    "location" => $location,
                 ]
             ];
             $num++;
