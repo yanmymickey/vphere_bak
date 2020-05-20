@@ -39,6 +39,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: vphere@mysql#2020
       MYSQL_DATABASE: vphere
+      TZ: Asia/Shanghai
   phpmyadmin:
     networks:
       - vphere_bridge
