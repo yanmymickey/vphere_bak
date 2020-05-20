@@ -123,7 +123,7 @@ class GroupController extends Controller {
 
     public function join (Request $request) {
         $mod = array(
-            'id' => [
+            'groupid' => [
                 'required',
                 'regex:/^\d+$/',
             ],
@@ -132,7 +132,7 @@ class GroupController extends Controller {
         if ($this->data === null) {
             return $this->msg;
         }
-        $sm_group = small_group::query()->where('id', $this->data['id'])->first();
+        $sm_group = small_group::query()->where('id', $this->data['groupid'])->first();
         if ($sm_group === null) {
             return error_msg(403, 6);
         }
