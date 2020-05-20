@@ -137,7 +137,7 @@ class GroupController extends Controller {
             return error_msg(403, 6);
         }
         $user = User::query()->where('id', $this->data['user_id'])->first();
-        $u_sg_estb = U_SG_estb::query()->where([["user_id", $this->data['user_id']], ["sg_id", $this->data['id']]])->first();
+        $u_sg_estb = U_SG_estb::query()->where([["user_id", $this->data['user_id']], ["sg_id", $this->data['groupid']]])->first();
         if ($u_sg_estb !== null) {
             return error_msg(403, 7);
         }
