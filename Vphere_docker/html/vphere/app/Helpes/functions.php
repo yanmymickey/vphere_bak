@@ -56,6 +56,8 @@ function message_arr ($msg_code) {
         23 => "无权限",
         24 => "声纹信息注册成功",
         25 => "声纹信息修改成功",
+        26 => "不在签到范围内",
+        27 => "没有未签到记录",
     );
     return $message_arr[$msg_code];
 }
