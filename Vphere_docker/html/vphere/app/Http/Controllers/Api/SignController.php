@@ -7,9 +7,7 @@ use App\Models\si_record;
 use App\Models\sign_in;
 use App\Models\U_SG_estb;
 use App\Models\User;
-use FFMpeg\FFMpeg;
-use FFMpeg\Format\Audio\Mp3;
-use FFMpeg\Format\Video\X264;
+
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
