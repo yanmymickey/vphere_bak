@@ -7,6 +7,9 @@ use App\Models\si_record;
 use App\Models\sign_in;
 use App\Models\U_SG_estb;
 use App\Models\User;
+use FFMpeg\FFMpeg;
+use FFMpeg\Format\Audio\Mp3;
+use FFMpeg\Format\Video\X264;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
@@ -41,16 +44,16 @@ class SignController extends Controller {
     public function reg (Request $request) {
 
         $mod = array(
-            'vphere' => ['required']
+            'vfile' => ['required']
         );
-        if (!$request->hasFile('vphere')) {
+        if (!$request->hasFile('vfile')) {
             return $this->msg = error_msg(403, 0);
         }
         $this->set_data($mod, $request);
         if ($this->data === null) {
             return $this->msg;
         }
-        $this->audio = $request->file('vphere')->openFile();
+        $this->audio = $request->file('vfile')->openFile();
         $this->audio = $this->audio->fread($this->audio->getSize());
         $user = User::query()->where('id', $this->data['user_id'])->first();
         $this->uuid = $user->open_id;
@@ -73,8 +76,12 @@ class SignController extends Controller {
             $user->save();
             if ($user->vpr_status === 2) {
                 return msg(200, 10);
+
             } else if ($user->vpr_status === 1) {
-                return msg(200, 1);
+                if ($user->vpr_num===2){
+                    return msg(200, 24);
+                }
+                return msg(200, 25);
             } else if ($user->vpr_status === 0) {
                 return msg(200, 12);
             }
@@ -94,16 +101,16 @@ class SignController extends Controller {
                 'required',
                 'regex:/^\d+$/',
             ],
-            'vphere' => ['required']
+            'vfile' => ['required']
         );
-        if (!$request->hasFile('vphere')) {
+        if (!$request->hasFile('vfile')) {
             return $this->msg = error_msg(403, 0);
         }
         $this->set_data($mod, $request);
         if ($this->data === null) {
             return $this->msg;
         }
-        $this->audio = $request->file('vphere')->openFile();
+        $this->audio = $request->file('vfile')->openFile();
         $this->audio = $this->audio->fread($this->audio->getSize());
         $user = User::query()->where('id', $this->data['user_id'])->first();
         $this->uuid = $user->open_id;
