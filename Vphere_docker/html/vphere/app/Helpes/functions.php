@@ -55,7 +55,7 @@ function message_arr ($msg_code) {
         22 => "系统中还没有集体",
         23 => "无权限",
         24 => "声纹信息注册成功",
-        245 => "声纹信息修改成功",
+        25 => "声纹信息修改成功",
     );
     return $message_arr[$msg_code];
 }
