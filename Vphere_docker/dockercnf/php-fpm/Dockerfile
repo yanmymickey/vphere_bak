@@ -4,6 +4,9 @@ RUN rm -Rf /var/lib/apt/lists/* \
          && apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
+    libzip-dev \
+    libzip-dev \
+    zlib1g-dev \
         && docker-php-ext-install -j$(nproc) bcmath \
         && docker-php-ext-install -j$(nproc) gd \
         && docker-php-ext-install -j$(nproc) pdo_mysql \
