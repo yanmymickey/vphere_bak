@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel {
         // $schedule->command('inspire')->hourly();
         $send_start_time = time();
         $send_start_time = $send_start_time + 600;
-        $send_end_time = $send_start_time + 6000;
+        $send_end_time = $send_start_time + 60000000;
         $send_start_time = date("Y-m-d H:i:s", $send_start_time);
         $send_end_time = date("Y-m-d H:i:s", $send_end_time);
 
@@ -52,7 +52,8 @@ class Kernel extends ConsoleKernel {
                     ->join('users', 'users.id', '=', 'u_sg_estb.user_id')
                     ->pluck('users.open_id');
                 foreach ($openids as $openid) {
-                    $this->sendMsg($openid, $groupname, $start_time, $end_time, $address);
+                    $res=$this->sendMsg($openid, $groupname, $start_time, $end_time, $address);
+                    dump($res);
                 }
             }
         }
@@ -129,7 +130,6 @@ class Kernel extends ConsoleKernel {
         $before_time = date("Y-m-d H:i:s",$before_time);
         //未查找到就为过期
         $access_token = access::query()->where([['id', 1], ['updated_at', '>', $before_time]])->first();
-
         //如果过期
         if (!$access_token) {
             //获取新的access_token
@@ -140,10 +140,8 @@ class Kernel extends ConsoleKernel {
             $response = $client->request('GET', $url, ['verify' => false,]);
             $res = $response->getBody()->getContents();
             $res = json_decode($res, true);
-
-            $access_token->access_token = $res['access_token'];
+            $access_token=access::query()->updateOrCreate(['id'=>1],['access_token'=>$res['access_token']]);
             //更新数据库
-            $access_token->save();
         }
         return $access_token->access_token;
     }
