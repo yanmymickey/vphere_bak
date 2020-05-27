@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel {
         // $schedule->command('inspire')->hourly();
         $send_start_time = time();
         $send_start_time = $send_start_time + 600;
-        $send_end_time = $send_start_time + 60;
+        $send_end_time = $send_start_time + 6000;
         $send_start_time = date("Y-m-d H:i:s", $send_start_time);
         $send_end_time = date("Y-m-d H:i:s", $send_end_time);
 
@@ -52,7 +52,6 @@ class Kernel extends ConsoleKernel {
                     ->join('users', 'users.id', '=', 'u_sg_estb.user_id')
                     ->pluck('users.open_id');
                 foreach ($openids as $openid) {
-                    $openid = $openids;
                     $this->sendMsg($openid, $groupname, $start_time, $end_time, $address);
                 }
             }
@@ -81,7 +80,7 @@ class Kernel extends ConsoleKernel {
         $data = [];
 
         //接收者（用户）的 openid
-        $data['touser'] = 'oZ_AN5ISqFZoLFDVhP9DU4TqK-F0';
+        $data['touser'] = $openid;
         //$openid;
 
         //所需下发的订阅模板id
@@ -127,7 +126,7 @@ class Kernel extends ConsoleKernel {
 
         //判断access_token是否过期
         $before_time = $now_time - $timeout;
-
+        $before_time = date("Y-m-d H:i:s",$before_time);
         //未查找到就为过期
         $access_token = access::query()->where([['id', 1], ['updated_at', '>', $before_time]])->first();
 
