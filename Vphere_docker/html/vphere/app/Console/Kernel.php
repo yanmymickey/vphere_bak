@@ -32,8 +32,7 @@ class Kernel extends ConsoleKernel {
         $send_end_time = $send_start_time + 60000000;
         $send_start_time = date("Y-m-d H:i:s", $send_start_time);
         $send_end_time = date("Y-m-d H:i:s", $send_end_time);
-
-        $signs = sign_in::query()
+        $signs = sign_in::query()->select(['sign_in.*','small_group.group_name'])
             ->join('small_group', 'small_group.id', '=', 'sign_in.group_id')
             ->where([['start_time', '>', $send_start_time], ['start_time', '<', $send_end_time], ['send', 0]])
             ->get();
