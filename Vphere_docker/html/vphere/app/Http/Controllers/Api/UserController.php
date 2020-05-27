@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\si_record;
-use App\Models\U_SG_estb;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Mockery\Exception;
@@ -41,17 +40,17 @@ class UserController extends Controller {
         if ($this->data === null) {
             return $this->msg;
         }
-       try {
-           $this->wechat_api_status = $this->get_openid_sessionkey($this->data['code']);
-       } catch (Exception $wechat_error) {
-           return error_msg($wechat_error->getCode(), $wechat_error->getMessage());
-       }
+//        try {
+//            $this->wechat_api_status = $this->get_openid_sessionkey($this->data['code']);
+//        } catch (Exception $wechat_error) {
+//            return error_msg($wechat_error->getCode(), $wechat_error->getMessage());
+//        }
 //        dump($this->data);
         $user = new User();
         //"oZ_AN5ISqFZoLFDVhP9DU4TqK-F0" $this->openid_session_key['openid']
-        $user = $user->firstOrCreate(['open_id' => $this->openid_session_key['openid']], [
+        $user = $user->firstOrCreate(['open_id' => "oZ_AN5ISqFZoLFDVhP9DU4TqK-F0"], [
             'username' => $this->data['nick_name'],
-            'open_id' => $this->openid_session_key['openid'],//"oZ_AN5ISqFZoLFDVhP9DU4TqK-F0",$this->openid_session_key['openid']
+            'open_id' => "oZ_AN5ISqFZoLFDVhP9DU4TqK-F0",//"oZ_AN5ISqFZoLFDVhP9DU4TqK-F0",$this->openid_session_key['openid']
             'avatarUrl' => $this->data['avatarUrl'],
             'vpr_num'=>3,
             'vpr_status'=>0
