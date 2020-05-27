@@ -49,6 +49,7 @@ class Kernel extends ConsoleKernel {
                 $sign->save();
                 $openids = U_SG_estb::query()
                     ->join('users', 'users.id', '=', 'u_sg_estb.user_id')
+                    ->where('id',$sign['group_id'])
                     ->pluck('users.open_id');
                 foreach ($openids as $openid) {
                     $res=$this->sendMsg($openid, $groupname, $start_time, $end_time, $address);
