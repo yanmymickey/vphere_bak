@@ -13,4 +13,4 @@ RUN rm -Rf /var/lib/apt/lists/* \
         && docker-php-ext-install -j$(nproc) mysqli \
         && docker-php-ext-install -j$(nproc) opcache \
         && docker-php-ext-install -j$(nproc) zip
-ADD cron.txt /var/spool/cron/crontab/root
+ADD cron.txt //etc/cron.d/schedule-crontab
