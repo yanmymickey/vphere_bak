@@ -280,7 +280,7 @@ class SignController extends Controller {
         $num = 1;
         foreach ($si_record as $record) {
             $location = json_decode($record['location'], true);
-            $location = $location['address'];
+            $location = $location['name'];
             $result += [
                 "group" . $num++ => [
                     "group_id" => $record['group_id'],
