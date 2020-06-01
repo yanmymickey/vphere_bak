@@ -36,8 +36,6 @@ class Kernel extends ConsoleKernel {
             ->join('small_group', 'small_group.id', '=', 'sign_in.group_id')
             ->where([['start_time', '>', $send_start_time], ['start_time', '<', $send_end_time], ['send', 0]])
             ->get();
-        $access=$this->getAccessToken();
-        dump($access);
         if (!$signs->isEmpty()) {
             $signs = $signs->toArray();
             foreach ($signs as $sign) {
@@ -55,7 +53,7 @@ class Kernel extends ConsoleKernel {
                     ->pluck('users.open_id');
                 foreach ($openids as $openid) {
                     $res=$this->sendMsg($openid, $groupname, $start_time, $end_time, $address);
-                    dump($res);
+//                    dump($res);
                 }
             }
         }
