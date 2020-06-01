@@ -446,16 +446,17 @@ class GroupController extends Controller {
         $join_group = array();
         $num = 1;
         foreach ($user_group as $group){
-            if($group['group_id']!=$groupid && $group['group_status'] != 3){
-                $join_group += [
-                    "group" . $num++ => [
-                        "status" => $group['status'],
-                        "group_id" => $group["group_id"],
-                        "group_name" => $group["group_name"],
-                        "group_status" => $group['group_status'],
-                    ]
-                ];
+            if($group['group_id']==$groupid && $group['group_status'] != 3){
+                continue;
             }
+            $join_group += [
+                "group" . $num++ => [
+                    "status" => $group['status'],
+                    "group_id" => $group["group_id"],
+                    "group_name" => $group["group_name"],
+                    "group_status" => $group['group_status'],
+                ]
+            ];
         }
         $join_group = json_encode($join_group);
         $user->join_group = $join_group;
@@ -467,16 +468,17 @@ class GroupController extends Controller {
         $join_group = array();
         $num = 1;
         foreach ($user_group as $group){
-            if($group['group_id']!=$groupid && $group['group_status'] == 3){
-                $join_group += [
-                    "group" . $num++ => [
-                        "status" => $group['status'],
-                        "group_id" => $group["group_id"],
-                        "group_name" => $group["group_name"],
-                        "group_status" => $group['group_status'],
-                    ]
-                ];
+            if($group['group_id']==$groupid && $group['group_status'] == 3){
+                continue;
             }
+            $join_group += [
+                "group" . $num++ => [
+                    "status" => $group['status'],
+                    "group_id" => $group["group_id"],
+                    "group_name" => $group["group_name"],
+                    "group_status" => $group['group_status'],
+                ]
+            ];
         }
         $join_group = json_encode($join_group);
         $user->join_group = $join_group;
