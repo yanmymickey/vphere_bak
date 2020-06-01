@@ -436,7 +436,7 @@ class GroupController extends Controller {
         $user_ids = $u_sg_estb->pluck('user_id');
         $u_sg_estb->delete();
         foreach ($user_ids as $user_id){
-            $this->user_join_largegroup($groupid,$user_id);
+            $this->user_join_group($groupid,$user_id);
         }
     }
 
