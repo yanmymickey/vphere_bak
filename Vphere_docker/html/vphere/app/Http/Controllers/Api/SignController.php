@@ -300,7 +300,7 @@ class SignController extends Controller {
         $latitude = (float)$latitude;
         $longitude = (float)$longitude;
         $distance = $this->getDistance($real_latitude, $real_longitude, $latitude, $longitude);
-        if ($distance > 25) {
+        if ($distance > 50) {
             return false;
         }
         return true;
