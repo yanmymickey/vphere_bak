@@ -36,6 +36,8 @@ class Kernel extends ConsoleKernel {
             ->join('small_group', 'small_group.id', '=', 'sign_in.group_id')
             ->where([['start_time', '>', $send_start_time], ['start_time', '<', $send_end_time], ['send', 0]])
             ->get();
+        $access=$this->getAccessToken();
+        dump($access);
         if (!$signs->isEmpty()) {
             $signs = $signs->toArray();
             foreach ($signs as $sign) {
@@ -95,10 +97,7 @@ class Kernel extends ConsoleKernel {
             "thing1" => [
                 'value' => $groupname,
             ],
-            "date4" => [
-                'value' => date('Y-m-d H:i:s', time())
-            ],
-            "time5" => [
+            "time15" => [
                 'value' => $start_time
             ],
             'time13' => [
@@ -129,8 +128,10 @@ class Kernel extends ConsoleKernel {
         $before_time = $now_time - $timeout;
         $before_time = date("Y-m-d H:i:s",$before_time);
         //未查找到就为过期
+
         $access_token = access::query()->where([['id', 1], ['updated_at', '>', $before_time]])->first();
         //如果过期
+
         if (!$access_token) {
             //获取新的access_token
             $appid = config('vphere.appid');
