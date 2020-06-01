@@ -446,7 +446,7 @@ class GroupController extends Controller {
         $join_group = array();
         $num = 1;
         foreach ($user_group as $group){
-            if($group['group_id']==$groupid && $group['group_status'] != 3){
+            if($group['group_id']==$groupid && $group['group_status'] != 1){
                 continue;
             }
             $join_group += [
@@ -468,7 +468,7 @@ class GroupController extends Controller {
         $join_group = array();
         $num = 1;
         foreach ($user_group as $group){
-            if($group['group_id']==$groupid && $group['group_status'] == 3){
+            if($group['group_id']==$groupid && $group['group_status'] == 1){
                 continue;
             }
             $join_group += [
